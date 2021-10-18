@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gpeex_app/src/ui/home_page.dart';
+import 'package:gpeex_app/src/ui/login_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final routes = <String, WidgetBuilder>{
+    LoginPage.tag: (context) => LoginPage(),
+    HomePage.tag: (context) => HomePage(),
+  };
 
   // This widget is the root of your application.
   @override
@@ -24,7 +29,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginPage(),
+      routes: routes,
     );
   }
 }
