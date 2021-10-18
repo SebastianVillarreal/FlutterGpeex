@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpeex_app/src/ui/home_page.dart';
+import '../blocs/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
       child: ElevatedButton(
         style: raisedButtonStyle,
         onPressed: () {
+          bloc.loginRequest();
           Navigator.of(context).pushNamed(HomePage.tag);
         },
         child: const Text(
