@@ -10,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
-    HomePage.tag: (context) => HomePage()
+    Home.tag: (context) => Home()
   };
 
   // This widget is the root of your application.

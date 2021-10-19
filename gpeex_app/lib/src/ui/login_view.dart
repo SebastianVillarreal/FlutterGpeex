@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setString("nombre", (user as UsuarioModel).nombre);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ShowTextPage()),
+      MaterialPageRoute(builder: (context) => Home()),
     );
   }
 
