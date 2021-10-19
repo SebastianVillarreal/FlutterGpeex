@@ -28,8 +28,6 @@ class ShowTextState extends State<ShowTextPage> {
             future: futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print("Not null");
-                print(snapshot.data!);
                 return Text(snapshot.data!.nombre);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

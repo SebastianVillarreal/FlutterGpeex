@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
       child: ElevatedButton(
         style: raisedButtonStyle,
         onPressed: () {
-          //bloc.loginRequest();
+          bloc.loginRequest();
 
           Navigator.push(
             context,
