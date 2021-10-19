@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:gpeex_app/src/models/usuario.dart';
+import 'package:gpeex_app/src/resources/login_api_provider.dart';
 import 'package:gpeex_app/src/ui/home_page.dart';
 import 'package:gpeex_app/src/ui/show_nombre_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../blocs/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginApiProvider loginApiProvider = LoginApiProvider();
+  UsuarioModel? user;
+
+  void _handleSubmitted() async {
+    user = await loginApiProvider.login();
+    if (user != null) {
+      _saveAndRedirectToHome();
+    }
+  }
+
+  void _saveAndRedirectToHome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("nombre", (user as UsuarioModel).nombre);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ShowTextPage()),
+    );
+  }
+
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.lightGreenAccent,
       padding: EdgeInsets.all(12),
@@ -56,12 +77,13 @@ class _LoginPageState extends State<LoginPage> {
       child: ElevatedButton(
         style: raisedButtonStyle,
         onPressed: () {
-          bloc.loginRequest();
+          _handleSubmitted();
+          //bloc.loginRequest();
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ShowTextPage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => ShowTextPage()),
+          // );
 
           //Navigator.of(context).pushNamed(HomePage.tag);
         },

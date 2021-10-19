@@ -7,6 +7,7 @@ class LoginApiProvider {
   Client client = Client();
 
   Future<UsuarioModel> login() async {
+    UsuarioModel user;
     print("funcion");
     final response = await client.post(
         Uri.parse("http://localhost:8888/GEPEX/mLogin/valida_user_api.php"),
@@ -14,7 +15,8 @@ class LoginApiProvider {
     print(response.body.toString());
 
     if (response.statusCode == 200) {
-      return UsuarioModel.fromJson(json.decode(response.body));
+      user = UsuarioModel.fromJson(json.decode(response.body));
+      return user;
     } else {
       throw Exception('failed');
     }
