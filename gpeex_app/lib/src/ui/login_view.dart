@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpeex_app/src/ui/home_page.dart';
+import 'package:gpeex_app/src/ui/show_nombre_page.dart';
 import '../blocs/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -56,7 +57,13 @@ class _LoginPageState extends State<LoginPage> {
         style: raisedButtonStyle,
         onPressed: () {
           bloc.loginRequest();
-          Navigator.of(context).pushNamed(HomePage.tag);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ShowTextPage()),
+          );
+
+          //Navigator.of(context).pushNamed(HomePage.tag);
         },
         child: const Text(
           "Log In",
