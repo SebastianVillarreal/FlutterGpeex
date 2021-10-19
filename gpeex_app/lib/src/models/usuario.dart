@@ -5,9 +5,9 @@ class UsuarioModel {
   String _idPerfil = "";
 
   UsuarioModel.fromJson(Map<String, dynamic> parsedJson) {
-    print(parsedJson["Nombre"]);
+    print(parsedJson["Persona"]);
     _id = parsedJson["Id"];
-    _nombre = parsedJson["Nombre"];
+    _nombre = parsedJson["Persona"];
     _perfil = parsedJson["Perfil"];
     _idPerfil = parsedJson["IdPerfil"];
   }
