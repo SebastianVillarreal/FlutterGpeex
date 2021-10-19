@@ -15,6 +15,7 @@ class ShowTextState extends State<ShowTextPage> {
   getValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? stringValue = prefs.getString('nombre');
+
     setState(() {
       nombrePersona = stringValue;
     });

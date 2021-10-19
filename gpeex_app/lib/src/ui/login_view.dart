@@ -26,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   void _saveAndRedirectToHome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("nombre", (user as UsuarioModel).nombre);
+    await prefs.setString("perfil", (user as UsuarioModel).perfil);
+    await prefs.setString("idUser", (user as UsuarioModel).id);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Home()),

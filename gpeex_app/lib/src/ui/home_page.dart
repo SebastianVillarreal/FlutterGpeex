@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpeex_app/src/ui/actividades_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'foro_page.dart';
 import 'show_nombre_page.dart';
@@ -11,6 +12,29 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   int _selectDrawerItem = 0;
+  String email = "";
+  String nombre = "";
+  String urlPhoto = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    getValues();
+    //futureUser = loginApiProvider.login();
+  }
+
+  getValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? nombreGet = prefs.getString('nombre');
+    String? emailGet = prefs.getString('perfil');
+    setState(() {
+      nombre = nombreGet!;
+      email = emailGet!;
+    });
+
+    return nombreGet;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +63,11 @@ class HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text('Sebastian Villarreal'),
-              accountEmail: Text('sebas_villalva13@hotmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.blue,
+            UserAccountsDrawerHeader(
+              accountName: Text(nombre),
+              accountEmail: Text(email),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.blueGrey,
                 child: Text(
                   "S",
                   style: TextStyle(fontSize: 40.0),
